@@ -1,0 +1,28 @@
+[build]
+  # Comando para construir la aplicación
+  command = "npm run build"
+  
+  # Directorio donde se publican los archivos construidos
+  publish = "dist/TalleresVivesAngular/browser"
+
+# Configuración para Single Page Application (SPA)
+# Redirige todas las rutas al index.html para que Angular maneje el routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Configuración de headers para optimizar el rendimiento
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Cache para archivos estáticos
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
